@@ -207,6 +207,16 @@
                             <span class="post-meta-reading meta-item">
                                 <span class="svg-icon icon-stopwatch"></span>{{ T "readingTime" $.ReadingTime }}
                             </span>
+                            {{ with .Param "tags" }}
+                                {{ range $index, $tag := (. | sort) }} 
+                                    {{ with $.Site.GetPage (printf "/%s/%s" "tags" $tag) }}
+                                    <span class="post-meta-reading meta-item">
+                                        <a href="{{ .Permalink }}">#{{ $tag | urlize }}</a>
+                                    </span>
+                                        
+                                    {{ end }}
+                                {{ end }}
+                            {{ end }}
                         </div>
 
                     </div>
